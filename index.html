@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>现代JavaScript全方位入门教程</title>
+
+    <style>
+        /* === 页面基础与布局样式 === */
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; line-height: 1.7; color: #333; background-color: #fdfaf6; margin: 0; }
+        .sidebar { width: 240px; position: fixed; top: 0; left: 0; height: 100%; background-color: #f0ad4e; color: #fff; padding: 20px; overflow-y: auto; box-sizing: border-box; }
+        .sidebar h2 { margin-top: 0; border-bottom: 1px solid rgba(255,255,255,0.3); padding-bottom: 10px; font-size: 1.2em; }
+        .sidebar ul { list-style-type: none; padding: 0; }
+        .sidebar li a { color: #fff; text-decoration: none; display: block; padding: 8px 15px; border-radius: 4px; transition: all 0.2s ease; font-weight: 500;}
+        .sidebar li a:hover { background-color: rgba(0,0,0,0.1); }
+        .main-content { margin-left: 260px; padding: 20px 40px; }
+        h1, h2, h3 { color: #d9534f; font-weight: 600; }
+        h1 { border-bottom: 2px solid #f0ad4e; padding-bottom: 10px; }
+        h2 { margin-top: 40px; border-bottom: 1px solid #fce3b5; padding-bottom: 8px; }
+        h2:first-of-type { margin-top: 0; }
+        h3 { margin-top: 30px; }
+        pre { background-color: #282c34; color: #abb2bf; padding: 20px; border-radius: 8px; overflow-x: auto; font-size: 14px; }
+        code { font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace; }
+        p > code, li > code { background-color: #fef4e2; color: #c7254e; padding: 2px 5px; border-radius: 4px; }
+        .demo-box { border: 1px solid #fce3b5; padding: 20px; margin-top: 15px; border-radius: 8px; background-color: #ffffff; position: relative; }
+        button { background-color: #5cb85c; color: white; border: none; padding: 10px 15px; border-radius: 4px; cursor: pointer; transition: background-color 0.2s; margin: 0 5px 5px 0; }
+        button:hover { background-color: #4cae4c; }
+        input[type="text"], input[type="number"] { padding: 8px; border: 1px solid #ccc; border-radius: 4px; margin: 5px; }
+        .output { margin-top: 10px; padding: 10px; background-color: #f7f7f9; border: 1px solid #e1e1e8; border-radius: 4px; min-height: 20px; font-weight: bold; }
+
+        /* === 用于DOM操作的CSS类 === */
+        /* .highlight-js 类已被移除 */
+        .style-changed {
+            color: white;
+            background-color: #d9534f;
+            padding: 10px;
+            border-radius: 5px;
+            font-weight: bold;
+            border: 2px dashed white;
+            transition: all 0.3s;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="sidebar">
+        <h2>JavaScript 教程</h2>
+        <ul>
+            <li><a href="#section-1">1. 基础与变量</a></li>
+            <li><a href="#section-2">2. 数据类型</a></li>
+            <li><a href="#section-3">3. 运算符</a></li>
+            <li><a href="#section-4">4. 条件与控制流</a></li>
+            <li><a href="#section-5">5. 循环</a></li>
+            <li><a href="#section-6">6. 函数</a></li>
+            <li><a href="#section-7">7. 数组与对象</a></li>
+            <li><a href="#section-8">8. DOM 操作</a></li>
+            <li><a href="#section-9">9. 事件处理</a></li>
+            <li><a href="#section-10">10. 异步编程</a></li>
+        </ul>
+    </div>
+
+    <div class="main-content">
+        <h1>现代JavaScript全方位入门教程</h1>
+        <p>JavaScript是Web的编程语言，用于创建动态和交互式的用户体验。本教程将引导你从零开始，掌握这门强大的语言。</p>
+
+        <h2 id="section-1">1. 基础与变量</h2>
+        <p>JavaScript代码通常放在 <code>&lt;script&gt;</code> 标签中。变量是用于存储数据值的容器。在现代JS中，我们使用 <code>let</code> (可变变量) 和 <code>const</code> (常量) 来声明变量。</p>
+        <p><code>console.log()</code> 是一个非常有用的工具，可以在浏览器的开发者控制台打印信息，便于调试。</p>
+        <div class="demo-box">
+            <button id="var-btn">点击我</button>
+            <p><b>操作：</b>点击按钮，然后在你的浏览器开发者工具(F12)的控制台中查看输出。</p>
+        </div>
+        <pre><code>// 当ID为 'var-btn' 的按钮被点击时...
+document.getElementById('var-btn').addEventListener('click', () => {
+  // 声明一个可变变量
+  let message = "你好, JavaScript!";
+  console.log(message); // 在控制台打印消息
+
+  // 改变变量的值
+  message = "变量的值已经改变。";
+  console.log(message);
+
+  // 声明一个常量
+  const PI = 3.14;
+  console.log("这是一个常量: ", PI);
+  // PI = 3.14159; // 这行代码会报错，因为常量不能被重新赋值
+});</code></pre>
+
+        <h2 id="section-2">2. 数据类型</h2>
+        <p>JavaScript有多种数据类型，包括基本类型（字符串、数字、布尔、null、undefined）和复杂类型（对象）。</p>
+        <div class="demo-box">
+            <button id="types-btn">显示数据类型</button>
+            <div class="output" id="types-output"></div>
+        </div>
+        <pre><code>const stringVar = "这是一个字符串";
+const numberVar = 100;
+const booleanVar = true;
+const nullVar = null;
+const undefinedVar = undefined;
+const objectVar = { name: "张三", age: 30 };
+
+// typeof 操作符可以返回变量的数据类型
+document.getElementById('types-btn').onclick = () => {
+  const output = `
+    '${stringVar}' 是 ${typeof stringVar}&lt;br&gt;
+    ${numberVar} 是 ${typeof numberVar}&lt;br&gt;
+    ${booleanVar} 是 ${typeof booleanVar}&lt;br&gt;
+    ${nullVar} 是 ${typeof nullVar} (注意: 这是一个历史遗留bug)&lt;br&gt;
+    ${undefinedVar} 是 ${typeof undefinedVar}&lt;br&gt;
+    对象 是 ${typeof objectVar}
+  `;
+  document.getElementById('types-output').innerHTML = output;
+};</code></pre>
+
+        <h2 id="section-3">3. 运算符</h2>
+        <p>运算符用于对变量和值执行操作。</p>
+        <div class="demo-box">
+            <input type="number" id="op-num1" value="10">
+            <input type="number" id="op-num2" value="5">
+            <button id="op-btn">计算</button>
+            <div class="output" id="op-output"></div>
+            <p><b>重点:</b> <code>===</code> (严格相等) 会比较值和类型，而 <code>==</code> (宽松相等) 会尝试类型转换。推荐始终使用 <code>===</code>。</p>
+        </div>
+        <pre><code>document.getElementById('op-btn').onclick = () => {
+  const num1 = Number(document.getElementById('op-num1').value);
+  const num2 = Number(document.getElementById('op-num2').value);
+
+  const sum = num1 + num2; // 加法
+  const difference = num1 - num2; // 减法
+  const product = num1 * num2; // 乘法
+  const quotient = num1 / num2; // 除法
+
+  document.getElementById('op-output').innerHTML = `和: ${sum}, 差: ${difference}, 积: ${product}, 商: ${quotient}`;
+};</code></pre>
+
+        <h2 id="section-4">4. 条件与控制流</h2>
+        <p>使用 <code>if...else</code> 语句，可以根据不同的条件执行不同的代码块。</p>
+        <div class="demo-box">
+            <input type="number" id="age-input" placeholder="请输入你的年龄">
+            <button id="age-btn">检查</button>
+            <div class="output" id="age-output"></div>
+        </div>
+        <pre><code>document.getElementById('age-btn').onclick = () => {
+  const age = document.getElementById('age-input').value;
+  let result;
+
+  if (age < 18) {
+    result = "你还是个少年。";
+  } else if (age >= 18 && age < 60) {
+    result = "你是正值壮年的成年人。";
+  } else {
+    result = "你是一位智慧的长者。";
+  }
+  document.getElementById('age-output').textContent = result;
+};</code></pre>
+
+        <h2 id="section-5">5. 循环</h2>
+        <p>循环可以重复执行一段代码。<code>for</code> 循环是最常见的循环类型。</p>
+        <div class="demo-box">
+            <button id="loop-btn">生成列表</button>
+            <ul id="loop-output"></ul>
+        </div>
+        <pre><code>document.getElementById('loop-btn').onclick = () => {
+  const list = document.getElementById('loop-output');
+  list.innerHTML = ''; // 清空列表
+
+  // for循环：从0到4，每次加1
+  for (let i = 0; i < 5; i++) {
+    // 创建一个新的列表项元素
+    const listItem = document.createElement('li');
+    listItem.textContent = `这是列表项 #${i + 1}`;
+    // 将列表项添加到ul中
+    list.appendChild(listItem);
+  }
+};</code></pre>
+
+        <h2 id="section-6">6. 函数</h2>
+        <p>函数是一段可重复使用的代码块。你可以通过函数名来调用它，并可以向其传递参数。</p>
+        <div class="demo-box">
+            <input type="text" id="name-input" placeholder="输入你的名字">
+            <button id="func-btn">打招呼</button>
+            <div class="output" id="func-output"></div>
+        </div>
+        <pre><code>// 定义一个名为 'greet' 的函数，它接受一个参数 'name'
+function greet(name) {
+  // 如果name为空，则提供一个默认值
+  const finalName = name || "陌生人";
+  return `你好, ${finalName}!`; // 返回一个拼接好的字符串
+}
+
+document.getElementById('func-btn').onclick = () => {
+  const userName = document.getElementById('name-input').value;
+  // 调用函数，并将结果显示在页面上
+  document.getElementById('func-output').textContent = greet(userName);
+};</code></pre>
+
+        <h2 id="section-7">7. 数组与对象</h2>
+        <p><b>数组</b>是值的有序列表。<b>对象</b>是键值对的无序集合。</p>
+        <div class="demo-box">
+            <button id="data-btn">显示数据</button>
+            <div class="output" id="data-output"></div>
+        </div>
+        <pre><code>// 这是一个对象数组，是实际开发中非常常见的数据结构
+const users = [
+  { id: 1, name: "爱丽丝", profession: "工程师" },
+  { id: 2, name: "鲍勃", profession: "设计师" },
+  { id: 3, name: "查理", profession: "项目经理" }
+];
+
+document.getElementById('data-btn').onclick = () => {
+  const outputDiv = document.getElementById('data-output');
+  outputDiv.innerHTML = '';
+
+  // 使用 forEach 方法遍历数组
+  users.forEach(user => {
+    outputDiv.innerHTML += `用户: ${user.name}, 职业: ${user.profession}&lt;br&gt;`;
+  });
+};</code></pre>
+
+        <h2 id="section-8">8. DOM 操作</h2>
+        <p>DOM (文档对象模型) 是HTML页面的编程接口。JavaScript可以通过DOM来动态地改变页面内容、结构和样式。</p>
+        <div class="demo-box">
+            <p id="dom-text">这是一段初始文本。</p>
+            <button id="dom-change-text-btn">改变文本</button>
+            <button id="dom-toggle-style-btn">切换样式类</button>
+        </div>
+        <pre><code>// 1. 获取元素
+const textElement = document.getElementById('dom-text');
+
+// 2. 改变文本内容
+document.getElementById('dom-change-text-btn').onclick = () => {
+  textElement.textContent = "文本已经被JavaScript改变了！";
+};
+
+// 3. 通过切换CSS类来改变样式
+document.getElementById('dom-toggle-style-btn').onclick = () => {
+  textElement.classList.toggle('style-changed');
+};</code></pre>
+
+        <h2 id="section-9">9. 事件处理</h2>
+        <p>JavaScript可以监听并响应用户的各种操作，如点击、鼠标移动、键盘输入等。这称为事件处理。</p>
+        <div class="demo-box">
+            <button id="event-click-btn">点我</button>
+            <div id="event-hover-area" style="padding: 20px; background: #eee; margin-top:10px;">把鼠标移到我上面</div>
+            <input type="text" id="event-key-input" placeholder="在这里输入文字..." style="width: 95%;">
+            <div class="output" id="event-output"></div>
+        </div>
+        <pre><code>const clickBtn = document.getElementById('event-click-btn');
+const hoverArea = document.getElementById('event-hover-area');
+const keyInput = document.getElementById('event-key-input');
+const eventOutput = document.getElementById('event-output');
+
+// 监听'click' (点击) 事件
+clickBtn.addEventListener('click', () => {
+  eventOutput.textContent = "按钮被点击了！";
+});
+
+// 监听'mouseover' (鼠标移入) 事件
+hoverArea.addEventListener('mouseover', () => {
+  eventOutput.textContent = "鼠标进入了指定区域！";
+});
+
+// 监听'keyup' (键盘按键抬起) 事件
+keyInput.addEventListener('keyup', (event) => {
+  // event.target.value 获取输入框的当前值
+  eventOutput.textContent = `你输入了: ${event.target.value}`;
+});</code></pre>
+
+        <h2 id="section-10">10. 异步编程</h2>
+        <p>JavaScript是单线程的，但通过异步编程，它可以执行耗时操作（如网络请求）而不会阻塞主线程。<code>async/await</code> 是处理异步操作的现代语法，它基于<code>Promise</code>。</p>
+        <p>下面的例子会从一个公共API获取一条随机的“**猫猫**”事实。</p>
+        <div class="demo-box">
+            <button id="async-btn">获取猫猫事实</button>
+            <div class="output" id="async-output">正在等待数据...</div>
+        </div>
+        <pre><code>// 'async' 关键字表示这是一个异步函数
+async function fetchCatFact() {
+  const outputDiv = document.getElementById('async-output');
+  outputDiv.textContent = '正在获取数据...';
+
+  try {
+    // 'await' 关键字会暂停函数执行，直到Promise完成（即网络请求返回）
+    const response = await fetch('https://catfact.ninja/fact');
+
+    // 将返回的数据解析为JSON格式
+    const data = await response.json();
+
+    // 更新页面内容 (根据新的API结构，事实在 data.fact 中)
+    outputDiv.textContent = data.fact;
+  } catch (error) {
+    // 如果网络请求失败，捕获错误
+    outputDiv.textContent = '获取数据失败，请重试。';
+    console.error('Fetch error:', error);
+  }
+}
+
+document.getElementById('async-btn').addEventListener('click', fetchCatFact);</code></pre>
+
+    </div>
+
+    <script>
+    // --- Section 1: Basics & Variables Demo ---
+    document.getElementById('var-btn').addEventListener('click', () => {
+      let message = "你好, JavaScript!";
+      console.log(message);
+      message = "变量的值已经改变。";
+      console.log(message);
+      const PI = 3.14;
+      console.log("这是一个常量: ", PI);
+    });
+
+    // --- Section 2: Data Types Demo ---
+    document.getElementById('types-btn').onclick = () => {
+      const stringVar = "这是一个字符串";
+      const numberVar = 100;
+      const booleanVar = true;
+      const nullVar = null;
+      const undefinedVar = undefined;
+      const objectVar = { name: "张三", age: 30 };
+      const output = `
+        '${stringVar}' 是 ${typeof stringVar}<br>
+        ${numberVar} 是 ${typeof numberVar}<br>
+        ${booleanVar} 是 ${typeof booleanVar}<br>
+        ${nullVar} 是 ${typeof nullVar} (注意: 这是个历史遗留bug)<br>
+        ${undefinedVar} 是 ${typeof undefinedVar}<br>
+        对象 是 ${typeof objectVar}
+      `;
+      document.getElementById('types-output').innerHTML = output;
+    };
+
+    // --- Section 3: Operators Demo ---
+    document.getElementById('op-btn').onclick = () => {
+      const num1 = Number(document.getElementById('op-num1').value);
+      const num2 = Number(document.getElementById('op-num2').value);
+      const sum = num1 + num2;
+      const difference = num1 - num2;
+      const product = num1 * num2;
+      const quotient = num1 / num2;
+      document.getElementById('op-output').innerHTML = `和: ${sum}, 差: ${difference}, 积: ${product}, 商: ${quotient}`;
+    };
+
+    // --- Section 4: Conditionals Demo ---
+    document.getElementById('age-btn').onclick = () => {
+      const age = document.getElementById('age-input').value;
+      let result;
+      if (age === '') {
+        result = "请输入年龄。";
+      } else if (age < 18) {
+        result = "你还是个少年。";
+      } else if (age >= 18 && age < 60) {
+        result = "你是正值壮年的成年人。";
+      } else {
+        result = "你是一位智慧的长者。";
+      }
+      document.getElementById('age-output').textContent = result;
+    };
+
+    // --- Section 5: Loops Demo ---
+    document.getElementById('loop-btn').onclick = () => {
+      const list = document.getElementById('loop-output');
+      list.innerHTML = '';
+      for (let i = 0; i < 5; i++) {
+        const listItem = document.createElement('li');
+        listItem.textContent = `这是列表项 #${i + 1}`;
+        list.appendChild(listItem);
+      }
+    };
+
+    // --- Section 6: Functions Demo ---
+    function greet(name) {
+      const finalName = name || "陌生人";
+      return `你好, ${finalName}!`;
+    }
+    document.getElementById('func-btn').onclick = () => {
+      const userName = document.getElementById('name-input').value;
+      document.getElementById('func-output').textContent = greet(userName);
+    };
+
+    // --- Section 7: Arrays & Objects Demo ---
+    const users = [
+      { id: 1, name: "爱丽丝", profession: "工程师" },
+      { id: 2, name: "鲍勃", profession: "设计师" },
+      { id: 3, name: "查理", profession: "项目经理" }
+    ];
+    document.getElementById('data-btn').onclick = () => {
+      const outputDiv = document.getElementById('data-output');
+      outputDiv.innerHTML = '';
+      users.forEach(user => {
+        outputDiv.innerHTML += `用户: ${user.name}, 职业: ${user.profession}<br>`;
+      });
+    };
+
+    // --- Section 8: DOM Manipulation Demo (UPDATED) ---
+    const textElement = document.getElementById('dom-text');
+    document.getElementById('dom-change-text-btn').onclick = () => {
+      textElement.textContent = "文本已经被JavaScript改变了！";
+    };
+    document.getElementById('dom-toggle-style-btn').onclick = () => {
+      textElement.classList.toggle('style-changed');
+    };
+
+    // --- Section 9: Events Demo ---
+    const clickBtn = document.getElementById('event-click-btn');
+    const hoverArea = document.getElementById('event-hover-area');
+    const keyInput = document.getElementById('event-key-input');
+    const eventOutput = document.getElementById('event-output');
+    clickBtn.addEventListener('click', () => { eventOutput.textContent = "按钮被点击了！"; });
+    hoverArea.addEventListener('mouseover', () => { eventOutput.textContent = "鼠标进入了指定区域！"; });
+    keyInput.addEventListener('keyup', (event) => { eventOutput.textContent = `你输入了: ${event.target.value}`; });
+
+    // --- Section 10: Async Demo ---
+    async function fetchCatFact() {
+      const outputDiv = document.getElementById('async-output');
+      outputDiv.textContent = '正在获取数据...';
+      try {
+        const response = await fetch('https://catfact.ninja/fact');
+        const data = await response.json();
+        outputDiv.textContent = data.fact;
+      } catch (error) {
+        outputDiv.textContent = '获取数据失败，请重试。';
+        console.error('Fetch error:', error);
+      }
+    }
+    document.getElementById('async-btn').addEventListener('click', fetchCatFact);
+    </script>
+</body>
+</html>
